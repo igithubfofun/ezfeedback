@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -22,8 +26,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var mongoose = require('mongoose');
+mongoose.connect(process.env.DB_CONN_EZFEEDBACK);
+
+require('./config/passport')(passport);
+
 app.use('/', routes);
 app.use('/users', users);
+
+// Required for passport
+app.use(session({ secret: 'secret' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+
+require('./routes/passport.js')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
