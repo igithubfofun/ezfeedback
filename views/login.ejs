@@ -1,0 +1,18 @@
+<% include ./partials/header %>
+<center>
+    <h1>Log In!</h1>
+    <form name="login_form" id="login_form" method="post" action="/login">
+        <div>
+            <input class="form-control" type="text" name="email" id="email" placeholder="Email address">
+        </div>
+        <br>
+        <div>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+        </div>
+        <br>
+        <input class="btn" type="submit" value="Log In">
+        <input class="btn logout" type ="submit" value="Log Out">
+    </form>
+</center>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<% include ./partials/footer %>
