@@ -121,31 +121,36 @@ router.get('/confidential', isAuthenticated, function(req,res){
   })
 });
 
-
 router.post('/confidential', isAuthenticated, function(req,res){
-
-    var a1 = req.body.ans1;
-    var a2 = req.body.ans2;
-    var a3 = req.body.ans3;
-    var a4 = req.body.ans4;
-    var id = tempid;
-
-    // var newAnswer = Answer({
-    //     answer1: a1,
-    //     answer2: a2,
-    //     answer3: a3,
-    //     answer4: a4,
-    //     id: tempid
-    // });
-    //   newAnswer.save(function(err) {
-    //       if (err) console.log(err);
-
-    //   });
-    //   res.send('Survey Sent!')
-});
+  req.session.user.questions = req.body.questions;
+  req.session.user.save();
+  res.redirect('/');
+})
 
 router.get('/questions', isAuthenticated, function(req,res){
   res.render('questions');
+})
+
+
+router.post('/questions', isAuthenticated, function(req,res){
+  var a1 = req.body.ans1;
+  var a2 = req.body.ans2;
+  var a3 = req.body.ans3;
+  var a4 = req.body.ans4;
+  var id = tempid;
+
+  var newAnswer = Answer({
+      answer1: a1,
+      answer2: a2,
+      answer3: a3,
+      answer4: a4,
+      id: tempid
+  });
+    newAnswer.save(function(err) {
+        if (err) console.log(err);
+
+    });
+    res.send('Survey Sent!')
 })
 
 

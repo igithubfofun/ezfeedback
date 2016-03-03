@@ -22,7 +22,6 @@ $(function(){
 
 
   $('#question_form').on('submit', function(e) {
-    e.preventDefault();
     var q1 = $('#question1').val();
     var q2 = $('#question2').val();
     var q3 = $('#question3').val();
@@ -50,8 +49,6 @@ $(function(){
   })
 
   // var saveQuestions = function(){
-
-
   // }
 
 })
