@@ -9,7 +9,7 @@ router.get('/', isAuthenticated, function(req, res, next) {
   User.findOne({ _id: req.session.userID}, function(err, user) {
     if (err) throw err;
 
-  res.render('index', {name: user.name} )
+  // res.render('index', {name: user.name} )
   // console.log(user.name);
   // res.send('hi');
   })
