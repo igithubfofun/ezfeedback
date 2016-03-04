@@ -150,26 +150,26 @@ router.get('/questions', isAuthenticated, function(req,res){
 })
 
 
-router.post('/questions', isAuthenticated, function(req,res){
-  var a1 = req.body.ans1;
-  var a2 = req.body.ans2;
-  var a3 = req.body.ans3;
-  var a4 = req.body.ans4;
-  var id = tempid;
+// router.post('/questions', isAuthenticated, function(req,res){
+//   var a1 = req.body.ans1;
+//   var a2 = req.body.ans2;
+//   var a3 = req.body.ans3;
+//   var a4 = req.body.ans4;
+//   var id = tempid;
 
-  var newAnswer = Answer({
-      answer1: a1,
-      answer2: a2,
-      answer3: a3,
-      answer4: a4,
-      id: tempid
-  });
-    newAnswer.save(function(err) {
-        if (err) console.log(err);
+//   var newAnswer = Answer({
+//       answer1: a1,
+//       answer2: a2,
+//       answer3: a3,
+//       answer4: a4,
+//       id: tempid
+//   });
+//     newAnswer.save(function(err) {
+//         if (err) console.log(err);
 
-    });
-    res.send('Survey Sent!')
-})
+//     });
+//     res.send('Survey Sent!')
+// })
 
 
 // router.get('/surveyquestions', isAuthenticated, function(req,res){
@@ -188,11 +188,12 @@ router.get('/:surveyName', function(req, res, next) {
       throw err;
     }
     res.render('answerquestions', {question: user.questions});
+    tempid = user._id;
     // res.send(user.questions);
-    console.log('hi');
   })
   //   // console.log(user._id);
-    tempid = req.session.userID;
+
+    console.log(tempid);
   //   // console.log(user[0].questions);
   //   console.log('survey name', user);
     // res.render('answerquestions', {question: user.questions});
@@ -219,7 +220,7 @@ router.post('/thanks', function(req, res) {
         if (err) console.log(err);
 
     });
-    res.send('Survey Sent!')
+    res.render('thanks')
 });
 
 router.get('/test', isAuthenticated, function(req, res){
@@ -236,6 +237,10 @@ router.get('/test', isAuthenticated, function(req, res){
   });
 })
 
+router.get('/logout', isAuthenticated, function(req,res){
+  req.session.destroy();
+  res.render('login');
+})
 
 
 
