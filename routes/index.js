@@ -4,7 +4,7 @@ var User = require('../models/user');
 var Answer = require('../models/answer');
 var tempid;
 
-/* GET home page. */
+//wherever Answer has id of the current user then display that result
 router.get('/', isAuthenticated, function(req, res, next) {
   // User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
@@ -180,7 +180,7 @@ router.get('/questions', isAuthenticated, function(req,res){
 // })
 
 
-
+//looking up User by params of surveyname and displaying questions of that User.
 router.get('/:surveyName', function(req, res, next) {
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) {
