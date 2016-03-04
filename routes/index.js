@@ -123,15 +123,15 @@ router.post('/login', function(req, res){
   // });
 });
 
-router.get('/feedback', isAuthenticated, function(req,res){
+// router.get('/feedback', isAuthenticated, function(req,res){
 
-  console.log('here', req.session.userID);
-  Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
-    res.render('responses', {answer: answers})
-    console.log(answers);
-  });
-  // res.send('hi')
-});
+//   console.log('here', req.session.userID);
+//   Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
+//     res.render('responses', {answer: answers})
+//     console.log(answers);
+//   });
+//   // res.send('hi')
+// });
 
 router.get('/confidential', isAuthenticated, function(req,res){
   User.find({_id: req.session.user._id}, function(err, results){
