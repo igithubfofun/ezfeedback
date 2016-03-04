@@ -5,14 +5,19 @@ var Answer = require('../models/answer');
 var tempid;
 
 /* GET home page. */
-// router.get('/', isAuthenticated, function(req, res, next) {
-//   User.findOne({ _id: req.session.userID}, function(err, user) {
-//     if (err) throw err;
-//   res.render('index', {name: user.name} )
-//   // console.log(user.name);
-//   // res.send('hi');
-//   })
-// });
+router.get('/', isAuthenticated, function(req, res, next) {
+  // User.findOne({ _id: req.session.userID}, function(err, user) {
+    Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
+      if (err) throw err;
+      res.render('responses', {answer: answers})
+      console.log(answers);
+    });
+
+  // res.render('index', {name: user.name} )
+  // console.log(user.name);
+  // res.send('hi');
+  // })
+});
 
 
 router.get('/signup', function(req, res) {
@@ -124,6 +129,7 @@ router.get('/feedback', isAuthenticated, function(req,res){
   console.log('here', req.session.userID);
   Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
     res.render('responses', {answer: answers})
+    console.log(answers);
   });
   // res.send('hi')
 });
@@ -182,14 +188,14 @@ router.get('/:surveyName', function(req, res, next) {
       console.log(err);
       throw err;
     }
-    // res.render('answerquestions', {question: user.questions});
-    res.send(user.questions);
+    res.render('answerquestions', {question: user.questions});
+    // res.send(user.questions);
   })
   //   // console.log(user._id);
-  //   tempid = req.session.userID;
+    tempid = req.session.userID;
   //   // console.log(user[0].questions);
   //   console.log('survey name', user);
-  //   res.render('answerquestions', {question: user.questions});
+    // res.render('answerquestions', {question: user.questions});
   //   // console.log(user[0].questions)
   // });
 });
