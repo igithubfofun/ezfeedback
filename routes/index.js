@@ -183,7 +183,8 @@ router.get('/:surveyName', function(req, res, next) {
       console.log(err);
       throw err;
     }
-    res.send(user);
+    res.render('answerquestions', {question: user.questions});
+    // res.send(user);
   })
   //   // console.log(user._id);
   //   tempid = req.session.userID;
