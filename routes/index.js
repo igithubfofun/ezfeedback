@@ -192,8 +192,6 @@ router.get('/:surveyName', function(req, res, next) {
     // res.send(user.questions);
   })
   //   // console.log(user._id);
-
-    console.log(tempid);
   //   // console.log(user[0].questions);
   //   console.log('survey name', user);
     // res.render('answerquestions', {question: user.questions});
