@@ -8,7 +8,7 @@ var tempid;
 router.get('/', isAuthenticated, function(req, res, next) {
   User.findOne({ _id: req.session.userID}, function(err, user) {
     if (err) throw err;
-
+    console.log('home', user);
   res.render('index', {name: user.name} )
   // console.log(user.name);
   // res.send('hi');
@@ -186,6 +186,7 @@ router.get('/:surveyName', function(req, res) {
     // console.log(user._id);
     tempid = req.session.userID;
     // console.log(user[0].questions);
+    console.log('survey name', user);
     res.render('answerquestions', {question: user.questions});
     // console.log(user[0].questions)
   });
