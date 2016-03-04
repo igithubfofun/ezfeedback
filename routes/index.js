@@ -8,7 +8,6 @@ var tempid;
 router.get('/', isAuthenticated, function(req, res, next) {
   // User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
-      if (err) throw err;
       res.render('responses', {answer: answers})
       console.log(answers);
     });
@@ -129,7 +128,7 @@ router.get('/feedback', isAuthenticated, function(req,res){
   console.log('here', req.session.userID);
   Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
     res.render('responses', {answer: answers})
-
+    console.log(answers);
   });
   // res.send('hi')
 });
