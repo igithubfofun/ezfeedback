@@ -183,11 +183,12 @@ router.post('/questions', isAuthenticated, function(req,res){
 
 router.get('/:surveyName', function(req, res, next) {
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
+    console.log(user.questions);
     if (err) {
       console.log(err);
       throw err;
     }
-    console.log(user.questions);
+
     // res.render('answerquestions', {question: user.questions});
     res.send('hi');
   })
