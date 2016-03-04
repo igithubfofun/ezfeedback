@@ -5,15 +5,14 @@ var Answer = require('../models/answer');
 var tempid;
 
 /* GET home page. */
-router.get('/', isAuthenticated, function(req, res, next) {
-  User.findOne({ _id: req.session.userID}, function(err, user) {
-    if (err) throw err;
-    console.log('home', user);
-  res.render('index', {name: user.name} )
-  // console.log(user.name);
-  // res.send('hi');
-  })
-});
+// router.get('/', isAuthenticated, function(req, res, next) {
+//   User.findOne({ _id: req.session.userID}, function(err, user) {
+//     if (err) throw err;
+//   res.render('index', {name: user.name} )
+//   // console.log(user.name);
+//   // res.send('hi');
+//   })
+// });
 
 
 router.get('/signup', function(req, res) {
