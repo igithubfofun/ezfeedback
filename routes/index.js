@@ -177,20 +177,21 @@ router.post('/questions', isAuthenticated, function(req,res){
 
 
 
-// router.get('/:surveyName', function(req, res, next) {
-//   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
-//     if (err) {
-//       console.log(err);
-//       throw err;
-//     }
-//     // console.log(user._id);
-//     tempid = req.session.userID;
-//     // console.log(user[0].questions);
-//     console.log('survey name', user);
-//     res.render('answerquestions', {question: user.questions});
-//     // console.log(user[0].questions)
-//   });
-// });
+router.get('/:surveyName', function(req, res, next) {
+  User.findOne({surveyName: req.params.surveyName}, function(err, user) {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+  })
+  //   // console.log(user._id);
+  //   tempid = req.session.userID;
+  //   // console.log(user[0].questions);
+  //   console.log('survey name', user);
+  //   res.render('answerquestions', {question: user.questions});
+  //   // console.log(user[0].questions)
+  // });
+});
 
 router.post('/thanks', function(req, res) {
 
