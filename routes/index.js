@@ -5,8 +5,14 @@ var Answer = require('../models/answer');
 var tempid;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('home')
+router.get('/', isAuthenticated, function(req, res, next) {
+  User.findOne({ _id: req.session.userID}, function(err, user) {
+    if (err) throw err;
+
+  res.render('index', {name: user.name} )
+  // console.log(user.name);
+  // res.send('hi');
+  })
 });
 
 
@@ -29,16 +35,13 @@ router.post('/signup', function(req, res){
       surveyName: surveyName
   });
     newUser.save(function(err) {
-        // console.log(newUser);
-        // req.session = newUser._id;
-        // var sess = req.session;
-        // console.log(sess);
-        if (err) console.log(err);
 
+        if (err) console.log(err);
     });
   req.session.userID = newUser._Id;
   tempid = req.session.userID;
   res.redirect('/questions');
+
 })
 
 router.get('/login', function(req,res){
@@ -224,12 +227,6 @@ router.get('/test', isAuthenticated, function(req, res){
   });
 })
 
-router.get('/feedback', isAuthenticated, function(req,res){
-  // Answer.findOne({ id: req.session.userID }, function(err, answers){
-  //   console.log(answers);
-  // });
-  res.send('hi')
-})
 
 
 

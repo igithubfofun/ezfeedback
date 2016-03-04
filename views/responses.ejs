@@ -1,16 +1,15 @@
-
+<% include ./partials/header %>
 <ul>
   <% for (var i = 0; i < answer.length; i ++){ %>
   <li><%= answer[i].answer1 %></li>
   <li><%= answer[i].answer2 %></li>
   <li><%= answer[i].answer3 %></li>
   <li><%= answer[i].answer4 %></li>
+  <br>
 <% } %>
-
-
-
 </ul>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
+<% include ./partials/footer %>

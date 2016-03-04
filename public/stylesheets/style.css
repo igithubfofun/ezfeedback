@@ -1,8 +1,80 @@
+@import url(https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister);
+@import url(https://fonts.googleapis.com/css?family=Lato:700,900);
 body {
-  padding: 50px;
+  /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightblue;
+  color:darkblue;
+  font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.navbar-brand, .navbar-nav>li>a {
+  color:darkblue;
 }
 
 a {
   color: #00B7FF;
 }
+
+img {
+  height:200px;
+  width:200px;
+}
+
+li {
+  font-size:24px;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-weight:bold;
+}
+
+.header{
+  text-align: center;
+  margin-top:-50px;
+  padding-bottom: 0px;
+  background-color: #edaf32;
+}
+
+.footer {
+  width:100%;
+  height:100px;
+  /*position:absolute;*/
+  bottom:0;
+  left:0;
+  margin-top:100px;
+  text-align:center;
+}
+
+.container{
+  padding:0px;
+}
+
+#login_form{
+  width:400px;
+  display:inline-block;
+}
+
+#new_user_form{
+  width:400px;
+  display:inline-block;
+  text-align:center;
+}
+
+ul {
+  padding:0px;
+}
+
+
+#matches{
+  /*text-align:center;*/
+  list-style-type: none;
+  padding:2%;
+}
+
+
+.content{
+  text-align: center;
+}
+
+
+
+
