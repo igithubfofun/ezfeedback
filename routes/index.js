@@ -177,7 +177,7 @@ router.post('/questions', isAuthenticated, function(req,res){
 
 
 
-router.get('/:surveyName', function(req, res) {
+router.get('/:surveyName', function(req, res, next) {
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) {
       console.log(err);
