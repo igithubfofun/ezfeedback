@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Answer = require('../models/answer');
+var tempid;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.send('home')
 });
+
 
 router.get('/signup', function(req, res) {
   res.render('signup');
@@ -35,6 +37,7 @@ router.post('/signup', function(req, res){
 
     });
   req.session.userID = newUser._Id;
+  tempid = req.session.userID;
   res.redirect('/questions');
 })
 
@@ -46,7 +49,6 @@ router.post('/login', function(req, res){
   var email = req.body.email;
   var password = req.body.password;
   // var hash;
-
 
 //multiple attempts with bcrypt, plan on working it out to salt and hash the current pw and match with pw in db
   User.findOne({ email: email}, function(err, user) {
@@ -115,6 +117,15 @@ router.post('/login', function(req, res){
   // });
 });
 
+router.get('/feedback', isAuthenticated, function(req,res){
+
+  console.log('here', req.session.userID);
+  Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
+    res.render('responses', {answer: answers})
+  });
+  // res.send('hi')
+});
+
 router.get('/confidential', isAuthenticated, function(req,res){
   User.find({_id: req.session.user._id}, function(err, results){
     res.status(200).json(results);
@@ -161,7 +172,7 @@ router.post('/questions', isAuthenticated, function(req,res){
 //   })
 // })
 
-var tempid;
+
 
 router.get('/:surveyName', function(req, res) {
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
@@ -170,7 +181,7 @@ router.get('/:surveyName', function(req, res) {
       throw err;
     }
     console.log(user._id);
-    tempid = user._id;
+    tempid = req.session.userID;
     // console.log(user[0].questions);
     res.render('answerquestions', {question: user.questions})
     // console.log(user[0].questions)
@@ -206,12 +217,18 @@ router.get('/test', isAuthenticated, function(req, res){
     if (err) {
       console.log(err);
       throw err;
-
     }
     console.log(answer);
     // res.render('responses', {answer: answer[0]})
     res.send('hi')
   });
+})
+
+router.get('/feedback', isAuthenticated, function(req,res){
+  // Answer.findOne({ id: req.session.userID }, function(err, answers){
+  //   console.log(answers);
+  // });
+  res.send('hi')
 })
 
 
