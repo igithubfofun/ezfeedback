@@ -59,6 +59,17 @@ li {
   text-align:center;
 }
 
+#answer_form{
+  width:400px;
+  display:inline-block;
+  text-align:center;
+
+}
+
+.question{
+  text-decoration: none;
+}
+
 ul {
   padding:0px;
 }
