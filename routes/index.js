@@ -4,10 +4,10 @@ var User = require('../models/user');
 var Answer = require('../models/answer');
 var tempid;
 
-//wherever Answer has id of the current user then display that result
+//wherever Answer has id of the current user then send that result to the responses view
 router.get('/', isAuthenticated, function(req, res, next) {
   // User.findOne({ _id: req.session.userID}, function(err, user) {
-    Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
+    Answer.find({ id: req.session.userID}, function(err, answers){
       res.render('responses', {answer: answers})
       console.log(answers);
     });
@@ -53,7 +53,7 @@ router.get('/login', function(req,res){
 
 router.post('/login', function(req, res){
   var email = req.body.email;
-  var password = req.body.password;
+  var inputPassword = req.body.password;
   // var hash;
 
 //multiple attempts with bcrypt, plan on working it out to salt and hash the current pw and match with pw in db
@@ -69,7 +69,7 @@ router.post('/login', function(req, res){
     //     // console.log(hashedPw);
     //     console.log('hello ' + user.password, isMatch); // -> Password123: true
     // });
-    if (dbPassword === password){
+    if (dbPassword === inputPassword){
       console.log('success');
 
       req.session.userID = user._id;
@@ -235,7 +235,7 @@ router.get('/test', isAuthenticated, function(req, res){
   });
 })
 
-router.get('/logout', isAuthenticated, function(req,res){
+router.post('/logout', isAuthenticated, function(req,res){
   req.session.destroy();
   res.render('login');
 })

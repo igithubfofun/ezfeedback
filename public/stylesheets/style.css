@@ -45,6 +45,14 @@ li {
   background-color: #edaf32;
 }
 
+li {
+  display: block;
+}
+
+.allquestions{
+  text-align: center;
+}
+
 .container{
   padding:0px;
 }
