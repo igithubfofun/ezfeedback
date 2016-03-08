@@ -194,7 +194,7 @@ router.get('/:surveyName', function(req, res, next) {
     // res.render('answerquestions', {question: user.questions});
   //   // console.log(user[0].questions)
   // });
-});s
+});
 
 router.post('/thanks', function(req, res) {
 
