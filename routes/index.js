@@ -9,13 +9,8 @@ router.get('/', isAuthenticated, function(req, res, next) {
   // User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, function(err, answers){
       res.render('responses', {answer: answers})
-      console.log(answers);
     });
 
-  // res.render('index', {name: user.name} )
-  // console.log(user.name);
-  // res.send('hi');
-  // })
 });
 
 
@@ -38,13 +33,14 @@ router.post('/signup', function(req, res){
       surveyName: surveyName
   });
     newUser.save(function(err) {
-
-        if (err) console.log(err);
+      if (err) console.log(err);
     });
-  req.session.userID = newUser._Id;
-  tempid = req.session.userID;
-  res.redirect('/questions');
 
+    if (newUser) {
+      req.session.userID = newUser._id;
+    }
+
+    res.redirect('/questions');
 })
 
 router.get('/login', function(req,res){
@@ -62,76 +58,19 @@ router.post('/login', function(req, res){
 
     dbPassword = user.password;
 
-    // test a matching password
-    // user.comparePassword(user.password, function(err, isMatch) {
-    //     if (err) throw err;
-
-    //     // console.log(hashedPw);
-    //     console.log('hello ' + user.password, isMatch); // -> Password123: true
-    // });
-    if (dbPassword === inputPassword){
-      console.log('success');
-
-      req.session.userID = user._id;
-
-
-      // console.log(req.session.user);
-      // console.log(req.session);
-
-      res.redirect('/questions')
-    }
-
-    else {
-      console.log('fail');
-      res.redirect('/login');
-    }
-
-    // bcrypt.compare(password, hash, function(err, same) {
-    //   console.log(password + ' ' + hash)
-    //   console.log(same);
-    // });
-
-    // bcrypt.compare('hi', user.password, function(err, res) {
-    //   console.log('fail')
-    // });
-
-    // test a failing password
-    // user.comparePassword('123Password', function(err, isMatch) {
-    //     if (err) throw err;
-    //     console.log('123Password:', isMatch); // -> 123Password: false
-    // });
+    user.comparePassword(inputPassword, function(err, isMatch) {
+        if (err) throw err;
+        if (isMatch === true){
+          req.session.userID = user._id;
+          res.redirect('/questions');
+        }
+        else {
+          res.redirect('/login');
+        }
+    });
   });
 
-  // bcrypt.compare(password, hash, function(err, res) {
-  //     console.log('fail')
-  // });
-
-  // User.findOne({ email: email}, function(err, user) {
-  //   if (err) throw err;
-
-  //   user.comparePassword(hashedPw, user.password, function(err, isMatch) {
-  //     console.log(password);
-  //     console.log(user.password);
-  //     if (err) console.log('error');
-  //       if (isMatch){
-  //         console.log(password, isMatch);
-  //         // req.session.userId = user._id;
-
-  //       }
-
-  //   });
-  // });
 });
-
-// router.get('/feedback', isAuthenticated, function(req,res){
-
-//   console.log('here', req.session.userID);
-//   Answer.find({ id: req.session.userID}, "answer1 answer2 answer3 answer4", function(err, answers){
-//     res.render('responses', {answer: answers})
-//     console.log(answers);
-//   });
-//   // res.send('hi')
-// });
 
 router.get('/confidential', isAuthenticated, function(req,res){
   User.find({_id: req.session.user._id}, function(err, results){
@@ -149,37 +88,6 @@ router.get('/questions', isAuthenticated, function(req,res){
   res.render('questions');
 })
 
-
-// router.post('/questions', isAuthenticated, function(req,res){
-//   var a1 = req.body.ans1;
-//   var a2 = req.body.ans2;
-//   var a3 = req.body.ans3;
-//   var a4 = req.body.ans4;
-//   var id = tempid;
-
-//   var newAnswer = Answer({
-//       answer1: a1,
-//       answer2: a2,
-//       answer3: a3,
-//       answer4: a4,
-//       id: tempid
-//   });
-//     newAnswer.save(function(err) {
-//         if (err) console.log(err);
-
-//     });
-//     res.send('Survey Sent!')
-// })
-
-
-// router.get('/surveyquestions', isAuthenticated, function(req,res){
-//   User.find({email: req.session.user.email}, function(err,results){
-//     console.log(results[0].questions);
-//       res.render('surveyquestions', {question: results[0].questions});
-//   })
-// })
-
-
 //looking up User by params of surveyname and displaying questions of that User.
 router.get('/:surveyName', function(req, res, next) {
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
@@ -188,12 +96,6 @@ router.get('/:surveyName', function(req, res, next) {
     tempid = user._id;
     // res.send(user.questions);
   })
-  //   // console.log(user._id);
-  //   // console.log(user[0].questions);
-  //   console.log('survey name', user);
-    // res.render('answerquestions', {question: user.questions});
-  //   // console.log(user[0].questions)
-  // });
 });
 
 router.post('/thanks', function(req, res) {
@@ -236,8 +138,6 @@ router.post('/logout', isAuthenticated, function(req,res){
   req.session.destroy();
   res.render('login');
 })
-
-
 
 //middleware for checking if user is authenticated, if not then redirect to login
 function isAuthenticated(req, res, next) {
