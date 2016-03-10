@@ -8,6 +8,7 @@ var tempid;
 router.get('/', isAuthenticated, function(req, res, next) {
   // User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, function(err, answers){
+      if (err) console.log(err);
       res.render('responses', {answer: answers})
     });
 
