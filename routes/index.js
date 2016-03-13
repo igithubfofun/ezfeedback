@@ -91,9 +91,10 @@ router.get('/questions', isAuthenticated, function(req,res){
 
 //looking up User by params of surveyname and displaying questions of that User.
 router.get('/:surveyName', function(req, res, next) {
+  console.log(req.params.surveyName);
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) console.log(err);
-    console.log(user.questions);
+    console.log('questions: ',user.questions);
     res.render('answerquestions', {question: user.questions});
     tempid = user._id;
     // res.send(user.questions);
@@ -147,13 +148,15 @@ function isAuthenticated(req, res, next) {
   if (!req.session.userID) {
     res.redirect('/login');
   }
-  User.findOne({ _id: req.session.userID}, function(err, user) {
-    if (err) {
-      res.redirect('/login');
-    }
-    req.session.user = user;
-    next();
-  });
+  else {
+    User.findOne({ _id: req.session.userID}, function(err, user) {
+      if (err) {
+        res.redirect('/login');
+      }
+      req.session.user = user;
+      next();
+      });
+  }
 }
 
 

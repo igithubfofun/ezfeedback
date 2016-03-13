@@ -1,15 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister);
 @import url(https://fonts.googleapis.com/css?family=Lato:700,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
 body {
-  /*padding: 50px;*/
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: lightblue;
-  color:darkblue;
-  font-family: 'Love Ya Like A Sister', cursive;
+  font: 14px;
+  background-color: #F3E9D2;
+  color:#3b3a36;
+  font-family: 'Roboto';
 }
 
 .navbar-brand, .navbar-nav>li>a {
-  color:darkblue;
+  color:#3b3a36;
 }
 
 a {
@@ -21,32 +22,31 @@ img {
   width:200px;
 }
 
+ul {
+  padding:0px;
+}
+
 li {
-  font-size:24px;
-  font-family: 'Love Ya Like A Sister', cursive;
+  font-size:18px;
   font-weight:bold;
+  display: block;
 }
 
 .header{
   text-align: center;
   margin-top:-50px;
   padding-bottom: 0px;
-  background-color: #edaf32;
+  background-color: #88D498;
 }
 
 .footer {
-  width:100%;
-  height:100px;
-  /*position:absolute;*/
-  bottom:0;
-  left:0;
-  margin-top:100px;
   text-align:center;
-  background-color: #edaf32;
-}
-
-li {
-  display: block;
+  background-color: #88D498;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:50px;
+  width:100%;
 }
 
 .allquestions{
@@ -78,11 +78,6 @@ li {
 .question{
   text-decoration: none;
 }
-
-ul {
-  padding:0px;
-}
-
 
 #matches{
   /*text-align:center;*/
