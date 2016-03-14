@@ -41,7 +41,7 @@ router.post('/signup', function(req, res){
       req.session.userID = newUser._id;
     }
 
-    res.redirect('/questions');
+    res.redirect('/question');
 })
 
 router.get('/login', function(req,res){
@@ -63,7 +63,7 @@ router.post('/login', function(req, res){
         if (err) throw err;
         if (isMatch === true){
           req.session.userID = user._id;
-          res.redirect('/questions');
+          res.redirect('/question');
         }
         else {
           res.redirect('/login');
@@ -85,7 +85,7 @@ router.post('/confidential', isAuthenticated, function(req,res){
   res.redirect('/');
 })
 
-router.get('/questions', isAuthenticated, function(req,res){
+router.get('/question', isAuthenticated, function(req,res){
   res.render('questions');
 })
 
