@@ -49,6 +49,12 @@ li {
   width:100%;
 }
 
+.welcome{
+  text-align: center;
+  margin-top: -40px;
+  padding:10px;
+}
+
 .allquestions{
   text-align: center;
 }

@@ -6,11 +6,14 @@ var tempid;
 
 //wherever Answer has id of the current user then send that result to the responses view
 router.get('/', isAuthenticated, function(req, res, next) {
-  // User.findOne({ _id: req.session.userID}, function(err, user) {
+  User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, function(err, answers){
       if (err) console.log(err);
-      res.render('responses', {answer: answers})
+      console.log(user.name);
+      // console.log(answers);
+      res.render('responses', {answer: answers, name: user.name, business: user.businessName})
     });
+  });
 
 });
 
@@ -91,7 +94,7 @@ router.get('/questions', isAuthenticated, function(req,res){
 
 var savedQuestions;
 //looking up User by params of surveyname and displaying questions of that User.
-router.get('/test/:surveyName', function(req, res, next) {
+router.get('/survey/:surveyName', function(req, res, next) {
   console.log(req.params.surveyName);
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) console.log(err);
