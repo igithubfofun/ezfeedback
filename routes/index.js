@@ -41,7 +41,7 @@ router.post('/signup', function(req, res){
       req.session.userID = newUser._id;
     }
 
-    res.redirect('/question');
+    res.redirect('/questions');
 })
 
 router.get('/login', function(req,res){
@@ -63,7 +63,7 @@ router.post('/login', function(req, res){
         if (err) throw err;
         if (isMatch === true){
           req.session.userID = user._id;
-          res.redirect('/question');
+          res.redirect('/questions');
         }
         else {
           res.redirect('/login');
@@ -85,20 +85,23 @@ router.post('/confidential', isAuthenticated, function(req,res){
   res.redirect('/');
 })
 
-router.get('/question', isAuthenticated, function(req,res){
+router.get('/questions', isAuthenticated, function(req,res){
   res.render('questions');
 })
 
+var savedQuestions;
 //looking up User by params of surveyname and displaying questions of that User.
 router.get('/:surveyName', function(req, res, next) {
   console.log(req.params.surveyName);
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) console.log(err);
-    console.log('questions: ', user.questions);
-    res.render('answerquestions', {question: user.questions});
+    savedQuestions = user.questions;
+    console.log('questions: ', savedQuestions);
     tempid = user._id;
     // res.send('hi');
   })
+    res.render('answerquestions', {question: savedQuestions});
+
   // next();
 });
 
