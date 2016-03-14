@@ -94,10 +94,10 @@ router.get('/:surveyName', function(req, res, next) {
   console.log(req.params.surveyName);
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) console.log(err);
-    console.log('questions: ',user.questions);
+    console.log('questions: ', user.questions);
     res.render('answerquestions', {question: user.questions});
     tempid = user._id;
-    // res.send(user.questions);
+    // res.send('hi');
   })
   // next();
 });

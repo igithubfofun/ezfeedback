@@ -8,7 +8,8 @@ var session = require('express-session');
 // var session = require('client-sessions');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+// var RedisStore = require('connect-redis')(express);
+// var sessionStore = new RedisStore();
 var app = express();
 
 // view engine setup
@@ -26,25 +27,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+var mongoose = require('mongoose');
+mongoose.connect(process.env.DB_CONN_EZFEEDBACK);
+
+
 app.use(session({
   cookieName: 'session',
   secret: 'pssst',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  activeDuration:1000,
   saveUninitialized: true,
-  resave: false
+  resave: false,
+  maxAge: 1000
 }));
 
-// app.use(session({
-//   secret: 'secret',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-// }))
 
 
-var mongoose = require('mongoose');
-mongoose.connect(process.env.DB_CONN_EZFEEDBACK);
+
 
 app.use('/', routes);
 app.use('/users', users);
