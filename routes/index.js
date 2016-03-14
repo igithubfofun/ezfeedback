@@ -93,7 +93,7 @@ var savedQuestions;
 //looking up User by params of surveyname and displaying questions of that User.
 router.get('/:surveyName', function(req, res, next) {
   console.log(req.params.surveyName);
-  User.findOne({surveyName: 'ezfeedback'}, function(err, user) {
+  User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) console.log(err);
     savedQuestions = user.questions;
     console.log('questions: ', savedQuestions);
