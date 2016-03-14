@@ -91,7 +91,7 @@ router.get('/questions', isAuthenticated, function(req,res){
 
 var savedQuestions;
 //looking up User by params of surveyname and displaying questions of that User.
-router.get('/:surveyName', function(req, res, next) {
+router.get('/test/:surveyName', function(req, res, next) {
   console.log(req.params.surveyName);
   User.findOne({surveyName: req.params.surveyName}, function(err, user) {
     if (err) console.log(err);
