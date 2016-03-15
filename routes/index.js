@@ -44,7 +44,7 @@ router.post('/signup', function(req, res){
       req.session.userID = newUser._id;
     }
 
-    res.redirect('/questions');
+    res.redirect('/');
 })
 
 router.get('/login', function(req,res){
@@ -66,7 +66,7 @@ router.post('/login', function(req, res){
         if (err) throw err;
         if (isMatch === true){
           req.session.userID = user._id;
-          res.redirect('/questions');
+          res.redirect('/');
         }
         else {
           res.redirect('/login');
@@ -144,9 +144,9 @@ router.get('/test', isAuthenticated, function(req, res){
   });
 })
 
-router.post('/logout', isAuthenticated, function(req,res){
+router.get('/logout', function(req,res, next){
   req.session.destroy();
-  res.render('login');
+  res.redirect('/login');
 })
 
 //middleware for checking if user is authenticated, if not then redirect to login

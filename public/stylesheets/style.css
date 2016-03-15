@@ -51,8 +51,9 @@ li {
 
 .welcome{
   text-align: center;
-  margin-top: -40px;
-  padding:10px;
+/*  margin-top: -40px;
+  padding:10px;*/
+  /*display: inline-block;*/
 }
 
 .allquestions{
@@ -66,6 +67,7 @@ li {
 #login_form{
   width:400px;
   display:inline-block;
+  text-align:center;
 }
 
 #new_user_form{
@@ -75,6 +77,13 @@ li {
 }
 
 #answer_form{
+  width:400px;
+  display:inline-block;
+  text-align:center;
+
+}
+
+#question_form{
   width:400px;
   display:inline-block;
   text-align:center;
@@ -91,11 +100,15 @@ li {
   padding:2%;
 }
 
-
 .content{
   text-align: center;
 }
 
+.navbar-brand, .navbar-nav>li>a{
+  padding:10px;
+}
 
-
-
+.navbar-brand, .navbar-nav>li>a:hover{
+  padding:10px;
+  background-color: #F3E9D2;
+}
