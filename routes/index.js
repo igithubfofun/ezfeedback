@@ -10,7 +10,7 @@ router.get('/', isAuthenticated, function(req, res, next) {
   User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, function(err, answers){
       if (err) console.log(err);
-      res.render('responses', {user: req.session.user, answer: answers, name: user.name, business: user.businessName, questions: user.questions})
+      res.render('responses', {user: req.session.user, answer: answers, name: user.name, business: user.businessName, surveyName: user.surveyName, questions: user.questions})
     });
   });
 });
@@ -45,8 +45,9 @@ router.post('/signup', function(req, res){
 })
 
 router.get('/login', function(req,res){
+  console.log(req.flash('loginMessage'));
   res.render('login', {
-    user: req.session.user, loginAttempt: loginAttempt
+    user: req.session.user, loginAttempt: loginAttempt, message: req.flash('loginMessage')
   });
 });
 
@@ -60,7 +61,6 @@ router.post('/login', function(req, res){
     if (err) throw err;
 
     if (!user) {
-      loginAttempt = false;
       res.redirect('/login');
     }
     else {

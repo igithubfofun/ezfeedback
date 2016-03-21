@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 // var RedisStore = require('connect-redis')(express);
 // var sessionStore = new RedisStore();
+var flash = require('connect-flash');
 var app = express();
 
 // view engine setup
@@ -21,6 +22,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(flash());
 
 // app.use(express.cookieParser());
 // app.use(express.session({secret: '1234567890QWERTY'}));

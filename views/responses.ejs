@@ -2,6 +2,7 @@
 <div class="welcome">
   <h1>Hello <%= name %></h1>
   <h4>You are viewing feedback on <%= business %></h4>
+  <h5>If you'd like to see the customer view, Click <a href="http://ezfeedback.herokuapp.com/survey/<%= surveyName %>">Here</a>
 </div>
 <ul>
   <% for (var i = 0; i < answer.length; i ++){ %>
