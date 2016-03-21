@@ -22,8 +22,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(flash());
-
 // app.use(express.cookieParser());
 // app.use(express.session({secret: '1234567890QWERTY'}));
 
