@@ -88,8 +88,19 @@ router.get('/confidential', isAuthenticated, function(req,res){
 });
 
 router.post('/confidential', isAuthenticated, function(req,res){
-  req.session.user.questions = req.body.questions;
-  req.session.user.save();
+  var q1 = req.body.question1;
+  var q2 = req.body.question2;
+  var q3 = req.body.question3;
+  var q4 = req.body.question4;
+
+  User.findOne({ _id: req.session.userID}, function(err, user) {
+    user.questions = [];
+    user.questions.push(q1,q2,q3,q4);
+    console.log(user.questions);
+    user.save();
+  });
+  // req.session.user.questions = req.body.questions;
+
   res.redirect('/');
 })
 
@@ -134,20 +145,6 @@ router.post('/thanks', function(req, res) {
     });
     res.render('thanks')
 });
-
-router.get('/test', isAuthenticated, function(req, res){
-
-  console.log(req.session.user);
-  Answer.findOne({userID: userID}, function(err, answer) {
-    if (err) {
-      console.log(err);
-      throw err;
-    }
-    console.log(answer);
-    // res.render('responses', {answer: answer[0]})
-    res.send('hi')
-  });
-})
 
 router.get('/logout', function(req,res, next){
   req.session.destroy();
