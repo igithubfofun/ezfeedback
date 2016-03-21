@@ -119,7 +119,7 @@ router.get('/survey/:surveyName', function(req, res, next) {
     console.log('questions: ', savedQuestions);
     tempid = user._id;
     // res.send('hi');
-    res.render('answerquestions', {question: savedQuestions});
+    res.render('answerquestions', {question: savedQuestions, business: user.businessName});
   })
   // next();
 });
