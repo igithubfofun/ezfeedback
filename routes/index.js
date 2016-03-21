@@ -9,7 +9,7 @@ router.get('/', isAuthenticated, function(req, res, next) {
   User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, function(err, answers){
       if (err) console.log(err);
-      console.log(user.name);
+
       // console.log(answers);
       res.render('responses', {answer: answers, name: user.name, business: user.businessName})
     });
@@ -89,6 +89,7 @@ router.post('/confidential', isAuthenticated, function(req,res){
 })
 
 router.get('/questions', isAuthenticated, function(req,res){
+  console.log(req.session.userID);
   res.render('questions');
 })
 
@@ -102,9 +103,8 @@ router.get('/survey/:surveyName', function(req, res, next) {
     console.log('questions: ', savedQuestions);
     tempid = user._id;
     // res.send('hi');
-  })
     res.render('answerquestions', {question: savedQuestions});
-
+  })
   // next();
 });
 
