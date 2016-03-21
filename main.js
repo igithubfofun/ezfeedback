@@ -10,7 +10,6 @@ var routes = require('./routes/index');
 
 // var RedisStore = require('connect-redis')(express);
 // var sessionStore = new RedisStore();
-var flash = require('connect-flash');
 var app = express();
 
 // view engine setup

@@ -47,7 +47,7 @@ router.post('/signup', function(req, res){
 router.get('/login', function(req,res){
   console.log(req.flash('loginMessage'));
   res.render('login', {
-    user: req.session.user, loginAttempt: loginAttempt, message: req.flash('loginMessage')
+    user: req.session.user
   });
 });
 
