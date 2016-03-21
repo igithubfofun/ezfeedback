@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 // var session = require('client-sessions');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+
 // var RedisStore = require('connect-redis')(express);
 // var sessionStore = new RedisStore();
 var flash = require('connect-flash');
@@ -48,7 +48,6 @@ app.use(session({
 
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
