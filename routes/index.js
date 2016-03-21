@@ -9,17 +9,13 @@ router.get('/', isAuthenticated, function(req, res, next) {
   User.findOne({ _id: req.session.userID}, function(err, user) {
     Answer.find({ id: req.session.userID}, function(err, answers){
       if (err) console.log(err);
-
-      // console.log(answers);
-      res.render('responses', {answer: answers, name: user.name, business: user.businessName})
+      res.render('responses', {user: req.session.user, answer: answers, name: user.name, business: user.businessName})
     });
   });
-
 });
 
-
 router.get('/signup', function(req, res) {
-  res.render('signup');
+  res.render('signup', {user: req.session.user});
 });
 
 router.post('/signup', function(req, res){
@@ -48,7 +44,9 @@ router.post('/signup', function(req, res){
 })
 
 router.get('/login', function(req,res){
-  res.render('login');
+  res.render('login', {
+    user: req.session.user
+  });
 });
 
 router.post('/login', function(req, res){
@@ -90,7 +88,7 @@ router.post('/confidential', isAuthenticated, function(req,res){
 
 router.get('/questions', isAuthenticated, function(req,res){
   console.log(req.session.userID);
-  res.render('questions');
+  res.render('questions', {user: req.session.user});
 })
 
 var savedQuestions;
