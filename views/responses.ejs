@@ -5,10 +5,10 @@
 </div>
 <ul>
   <% for (var i = 0; i < answer.length; i ++){ %>
-  <li><%= answer[i].answer1 %></li>
-  <li><%= answer[i].answer2 %></li>
-  <li><%= answer[i].answer3 %></li>
-  <li><%= answer[i].answer4 %></li>
+  <li><%= questions[0] %>: <%= answer[i].answer1 %></li>
+  <li><%= questions[1] %>: <%= answer[i].answer2 %></li>
+  <li><%= questions[2] %>: <%= answer[i].answer3 %></li>
+  <li><%= questions[3] %>: <%= answer[i].answer4 %></li>
   <br>
 <% } %>
 </ul>
