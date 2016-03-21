@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var Answer = require('../models/answer');
 var tempid;
+var loginAttempt;
 
 //wherever Answer has id of the current user then send that result to the responses view
 router.get('/', isAuthenticated, function(req, res, next) {
@@ -45,7 +46,7 @@ router.post('/signup', function(req, res){
 
 router.get('/login', function(req,res){
   res.render('login', {
-    user: req.session.user
+    user: req.session.user, loginAttempt: loginAttempt
   });
 });
 
@@ -58,18 +59,25 @@ router.post('/login', function(req, res){
   User.findOne({ email: email}, function(err, user) {
     if (err) throw err;
 
-    dbPassword = user.password;
+    if (!user) {
+      loginAttempt = false;
+      res.redirect('/login');
+    }
+    else {
 
-    user.comparePassword(inputPassword, function(err, isMatch) {
-        if (err) throw err;
-        if (isMatch === true){
-          req.session.userID = user._id;
-          res.redirect('/');
-        }
-        else {
-          res.redirect('/login');
-        }
-    });
+      dbPassword = user.password;
+
+      user.comparePassword(inputPassword, function(err, isMatch) {
+          if (err) throw err;
+          if (isMatch === true){
+            req.session.userID = user._id;
+            res.redirect('/');
+          }
+          else {
+            res.redirect('/login');
+          }
+      });
+    }
   });
 
 });
