@@ -44,7 +44,7 @@ router.post('/signup', function(req, res){
       req.session.userID = newUser._id;
     }
 
-    res.redirect('/');
+    res.redirect('/questions');
 })
 
 router.get('/login', function(req,res){
