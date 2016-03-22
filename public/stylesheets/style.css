@@ -48,7 +48,10 @@ li {
   height:50px;
   width:100%;
 }
+.footer>h3{
+  margin-top: 15px;
 
+}
 .welcome{
   text-align: center;
 /*  margin-top: -40px;
